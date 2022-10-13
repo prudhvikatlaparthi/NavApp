@@ -1,4 +1,4 @@
-package com.pru.navapp.composables
+package com.pru.navapp.ui.composables
 
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text

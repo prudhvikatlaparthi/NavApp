@@ -1,4 +1,4 @@
-package com.pru.navapp.dialog
+package com.pru.navapp.ui.dialog
 
 import android.os.Bundle
 import android.view.View

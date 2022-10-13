@@ -1,15 +1,15 @@
-package com.pru.navapp.fragments
+package com.pru.navapp.ui.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pru.navapp.databinding.PassengerItemBinding
 import com.pru.navapp.model.response.PassengerData
 
 class PassengerOtherAdapter :
-    RecyclerView.Adapter<PassengerOtherAdapter.ViewHolder>() {
+    ListAdapter<PassengerData, PassengerOtherAdapter.ViewHolder>(differCallback) {
     class ViewHolder(private val binding: PassengerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -24,7 +24,7 @@ class PassengerOtherAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindData(differ.currentList[position])
+        holder.bindData(getItem(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,26 +34,20 @@ class PassengerOtherAdapter :
         return ViewHolder(holder)
     }
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
+    companion object {
+        private val differCallback = object : DiffUtil.ItemCallback<PassengerData>() {
+            override fun areItemsTheSame(oldItem: PassengerData, newItem: PassengerData): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(
+                oldItem: PassengerData,
+                newItem: PassengerData
+            ): Boolean =
+                oldItem == newItem
+
+        }
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<PassengerData>() {
-        override fun areItemsTheSame(oldItem: PassengerData, newItem: PassengerData): Boolean =
-            oldItem.id == newItem.id
-
-        override fun areContentsTheSame(
-            oldItem: PassengerData,
-            newItem: PassengerData
-        ): Boolean =
-            oldItem == newItem
-
-    }
-
-    fun submitData(data: List<PassengerData>) {
-        differ.submitList(data.toMutableList())
-    }
-
-    private val differ = AsyncListDiffer(this, differCallback)
+//    private val differ = AsyncListDiffer(this, differCallback)
 
 }

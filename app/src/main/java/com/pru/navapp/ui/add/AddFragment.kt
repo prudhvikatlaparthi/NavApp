@@ -1,4 +1,4 @@
-package com.pru.navapp.fragments
+package com.pru.navapp.ui.add
 
 import android.widget.Toast
 import androidx.core.os.bundleOf

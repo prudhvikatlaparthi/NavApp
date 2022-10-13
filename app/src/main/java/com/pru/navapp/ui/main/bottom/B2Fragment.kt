@@ -1,4 +1,4 @@
-package com.pru.navapp.bottom
+package com.pru.navapp.ui.main.bottom
 
 import android.os.Bundle
 import com.pru.navapp.R

@@ -30,9 +30,6 @@ abstract class BaseDialogFragment<VB : ViewBinding>(private val bindingInflater:
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindingInflater.invoke(inflater)
-        if (_binding == null) {
-            throw IllegalArgumentException("Binding cannot be null")
-        }
         return binding.root
     }
 

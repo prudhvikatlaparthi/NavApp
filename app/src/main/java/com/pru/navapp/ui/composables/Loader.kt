@@ -1,4 +1,4 @@
-package com.pru.navapp.composables
+package com.pru.navapp.ui.composables
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

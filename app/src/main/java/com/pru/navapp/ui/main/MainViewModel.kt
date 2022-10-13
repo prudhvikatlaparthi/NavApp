@@ -1,7 +1,6 @@
-package com.pru.navapp.fragments
+package com.pru.navapp.ui.main
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pru.navapp.R
 import com.pru.navapp.appNavigator

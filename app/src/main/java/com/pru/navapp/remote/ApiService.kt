@@ -1,6 +1,7 @@
 package com.pru.navapp.remote
 
 import com.pru.navapp.model.response.PassengersResponse
+import com.pru.navapp.model.response.UsersResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,7 +12,8 @@ import retrofit2.http.Query
 interface ApiService {
 
     companion object {
-        private const val kBASEURL = "https://api.instantwebtools.net"
+        //        private const val kBASEURL = "https://api.instantwebtools.net"
+        private const val kBASEURL = "https://reqres.in"
 
         fun getApiService(): ApiService = Retrofit.Builder().baseUrl(kBASEURL)
             .client(
@@ -29,4 +31,10 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("size") size: Int = 30
     ): PassengersResponse
+
+    @GET("/api/users")
+    suspend fun getUsers(
+        @Query("page") page: Int,
+        @Query("per_page") size: Int
+    ): UsersResponse
 }
