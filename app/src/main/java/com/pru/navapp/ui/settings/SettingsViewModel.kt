@@ -1,12 +1,13 @@
-package com.pru.navapp.fragments
+package com.pru.navapp.ui.settings
 
 import androidx.lifecycle.viewModelScope
 import com.pru.navapp.R
 import com.pru.navapp.apiRepository
+import com.pru.navapp.appNavigator
 import com.pru.navapp.base.BaseViewModel
-import com.pru.navapp.composables.AlertItem
+import com.pru.navapp.ui.composables.AlertItem
 import com.pru.navapp.listeners.Paging
-import com.pru.navapp.model.response.PassengerData
+import com.pru.navapp.model.response.User
 import com.pru.navapp.utils.ApiState
 import com.pru.navapp.utils.Constants.kInitialPage
 import com.pru.navapp.utils.Global.dismissLoader
@@ -14,14 +15,15 @@ import com.pru.navapp.utils.Global.getString
 import com.pru.navapp.utils.Global.showAlertDialog
 import com.pru.navapp.utils.Global.showLoader
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class SettingsViewModel : BaseViewModel(), Paging {
 
-    private val _data = MutableStateFlow(mutableListOf<PassengerData>())
-    val data: StateFlow<MutableList<PassengerData>> = _data
+    private val _data = MutableStateFlow(mutableListOf<User>())
+    val data: StateFlow<MutableList<User>> = _data
     override var pageIndex = kInitialPage
     override var isLoading = false
     override var isLastPage = false
@@ -35,7 +37,7 @@ class SettingsViewModel : BaseViewModel(), Paging {
             _data.value = mutableListOf()
         }
         viewModelScope.launch(Dispatchers.IO) {
-            apiRepository.getPassengersPaging(
+            apiRepository.getUsers(
                 page = pageIndex,
                 size = getPageSize()
             ).collect { state ->
@@ -54,10 +56,11 @@ class SettingsViewModel : BaseViewModel(), Paging {
                         isLoading = true
                         showLoader(isForInlineProgress = pageIndex != kInitialPage)
                     }
+
                     is ApiState.Success -> {
                         isLoading = false
                         dismissLoader()
-                        if (state.data?.passengerData?.isEmpty() == true) {
+                        if (state.data?.users?.isEmpty() == true) {
                             isLastPage = true
                             if (pageIndex == kInitialPage) {
                                 _data.value.clear()
@@ -72,11 +75,26 @@ class SettingsViewModel : BaseViewModel(), Paging {
                         }
                         pageIndex++
                         val temp = _data.value.toMutableList()
-                        temp.addAll(state.data!!.passengerData!!)
+                        temp.addAll(state.data!!.users!!)
                         _data.value = temp
                     }
                 }
             }
+        }
+    }
+
+    fun details(id: Int) {
+        viewModelScope.launch {
+            showLoader()
+            delay(4000)
+            _data.value.filter { it.id == id }.getOrNull(0)?.id?.let {
+                appNavigator.navigate(directions =
+                SettingsFragmentDirections.actionSettingsFragmentToAboutFragment(
+                    it
+                )
+                )
+            }
+            dismissLoader()
         }
     }
 }

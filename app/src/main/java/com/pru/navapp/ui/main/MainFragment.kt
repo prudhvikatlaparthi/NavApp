@@ -1,4 +1,4 @@
-package com.pru.navapp.fragments
+package com.pru.navapp.ui.main
 
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,7 +11,7 @@ import com.pru.navapp.base.BaseFragment
 import com.pru.navapp.databinding.FragmentMainBinding
 import com.pru.navapp.listeners.RefreshListener
 import com.pru.navapp.utils.Global.createOptionsMenu
-import listeners.NavigationDrawListener
+import com.pru.navapp.listeners.NavigationDrawListener
 
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate),
     NavigationDrawListener {

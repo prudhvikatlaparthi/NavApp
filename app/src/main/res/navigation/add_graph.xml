@@ -6,7 +6,7 @@
     app:startDestination="@id/sampleDialogFragment">
     <dialog
         android:id="@+id/sampleDialogFragment"
-        android:name="com.pru.navapp.dialog.SampleDialogFragment"
+        android:name="com.pru.navapp.ui.dialog.SampleDialogFragment"
         android:label="fragment_sample_dialog"
         tools:layout="@layout/fragment_sample_dialog">
         <action
@@ -15,7 +15,7 @@
     </dialog>
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.pru.navapp.fragments.AddFragment"
+        android:name="com.pru.navapp.ui.add.AddFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <argument

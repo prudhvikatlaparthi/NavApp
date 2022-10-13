@@ -31,9 +31,6 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding>(private val bindi
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindingInflater.invoke(inflater)
-        if (_binding == null) {
-            throw IllegalArgumentException("Binding cannot be null")
-        }
         return binding.root
     }
 

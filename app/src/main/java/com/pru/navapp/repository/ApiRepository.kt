@@ -1,6 +1,7 @@
 package com.pru.navapp.repository
 
 import com.pru.navapp.model.response.PassengersResponse
+import com.pru.navapp.model.response.UsersResponse
 import com.pru.navapp.paging.PagingUtils.createPager
 import com.pru.navapp.remote.ApiService
 import com.pru.navapp.utils.ApiState
@@ -20,6 +21,17 @@ class ApiRepository(private val apiService: ApiService) {
             emit(ApiState.Success(it))
         }.onFailure {
             emit(ApiState.Failure(it.message ?: "Error"))
+        }
+    }
+
+    suspend fun getUsers(page: Int, size: Int) = flow<ApiState<UsersResponse>> {
+        emit(ApiState.Loading())
+        kotlin.runCatching {
+            apiService.getUsers(page = page, size = size)
+        }.onSuccess {
+            emit(ApiState.Success(it))
+        }.onFailure {
+            emit(ApiState.Failure(it.message))
         }
     }
 }

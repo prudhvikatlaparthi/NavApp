@@ -12,7 +12,7 @@ import androidx.lifecycle.Lifecycle
 import com.pru.navapp.MainActivity
 import com.pru.navapp.R
 import com.pru.navapp.appContext
-import com.pru.navapp.composables.AlertItem
+import com.pru.navapp.ui.composables.AlertItem
 
 object Global {
     fun Fragment.getMainActivity(): MainActivity {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.pru.navapp.fragments.MainFragment"
+        android:name="com.pru.navapp.ui.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
@@ -22,13 +22,17 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.pru.navapp.fragments.SettingsFragment"
+        android:name="com.pru.navapp.ui.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
     <include app:graph="@navigation/add_graph" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.pru.navapp.AboutFragment"
+        android:name="com.pru.navapp.ui.about.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" >
         <argument

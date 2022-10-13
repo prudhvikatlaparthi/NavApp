@@ -1,4 +1,4 @@
-package com.pru.navapp.fragments
+package com.pru.navapp.ui.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

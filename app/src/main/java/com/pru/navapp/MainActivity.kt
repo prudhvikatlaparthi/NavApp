@@ -21,11 +21,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
-import com.pru.navapp.composables.Alert
-import com.pru.navapp.composables.AlertItem
-import com.pru.navapp.composables.Loader
+import com.pru.navapp.ui.composables.Alert
+import com.pru.navapp.ui.composables.AlertItem
+import com.pru.navapp.ui.composables.Loader
 import com.pru.navapp.databinding.ActivityMainBinding
-import com.pru.navapp.fragments.MainViewModel
+import com.pru.navapp.ui.main.MainViewModel
 import com.pru.navapp.listeners.OnBackPressListener
 import com.pru.navapp.navigation.AppNavigator.NavigationIntent
 import kotlinx.coroutines.launch

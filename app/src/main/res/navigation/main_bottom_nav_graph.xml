@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/b1Fragment"
-        android:name="com.pru.navapp.bottom.B1Fragment"
+        android:name="com.pru.navapp.ui.main.bottom.B1Fragment"
         android:label="fragment_b1"
         tools:layout="@layout/fragment_b1" />
     <fragment
         android:id="@+id/b2Fragment"
-        android:name="com.pru.navapp.bottom.B2Fragment"
+        android:name="com.pru.navapp.ui.main.bottom.B2Fragment"
         android:label="fragment_b2"
         tools:layout="@layout/fragment_b2" />
     <fragment
         android:id="@+id/b3Fragment"
-        android:name="com.pru.navapp.bottom.B3Fragment"
+        android:name="com.pru.navapp.ui.main.bottom.B3Fragment"
         android:label="fragment_b3"
         tools:layout="@layout/fragment_b3" />
 </navigation>
