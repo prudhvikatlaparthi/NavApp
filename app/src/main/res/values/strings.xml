@@ -5,4 +5,5 @@
     <string name="del">Deleted</string>
     <string name="loading">Loading…</string>
     <string name="msg_no_data">No data found</string>
+    <string name="enable_play_services">Please enable/update Google Play Services from settings</string>
 </resources>
