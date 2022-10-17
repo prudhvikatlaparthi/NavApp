@@ -5,13 +5,12 @@ import androidx.navigation.NavOptions
 import com.pru.navapp.navigation.AppNavigator.NavigationIntent
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 
 class AppNavigatorSdk : AppNavigator {
     override val navChannel_: Channel<NavigationIntent> = Channel(
-        capacity = Int.MAX_VALUE,
-        onBufferOverflow = BufferOverflow.DROP_LATEST,
+        capacity = Channel.UNLIMITED,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
     override val navChannel
         get() = navChannel_.receiveAsFlow()

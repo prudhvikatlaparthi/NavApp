@@ -5,13 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.pru.navapp.R
 import com.pru.navapp.appNavigator
 import com.pru.navapp.base.BaseViewModel
+import com.pru.navapp.base.NothingIntent
 import com.pru.navapp.listeners.Paging
 import com.pru.navapp.utils.AppPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainViewModel : BaseViewModel(), Paging {
+class MainViewModel : BaseViewModel<NothingIntent>(), Paging {
 
     init {
         AppPreferences.clickCount = (0..100).random()
@@ -35,4 +36,6 @@ class MainViewModel : BaseViewModel(), Paging {
     override fun fetchData() {
 
     }
+
+    override fun triggerEvent(intent: NothingIntent) = Unit
 }

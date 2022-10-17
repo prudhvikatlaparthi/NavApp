@@ -2,21 +2,24 @@ package com.pru.navapp.ui.main
 
 import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.pru.navapp.R
 import com.pru.navapp.base.BaseFragment
+import com.pru.navapp.base.ResultBack
 import com.pru.navapp.databinding.FragmentMainBinding
-import com.pru.navapp.listeners.RefreshListener
-import com.pru.navapp.utils.Global.createOptionsMenu
 import com.pru.navapp.listeners.NavigationDrawListener
+import com.pru.navapp.listeners.RefreshListener
+import com.pru.navapp.ui.add.AddResultBackValue
+import com.pru.navapp.utils.Global.createOptionsMenu
+import com.pru.navapp.utils.Global.setResultListener
 
 class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate),
     NavigationDrawListener {
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
+    private var addResultBackValue : ResultBack? = null
 
     private fun getCurrentFragment(): Fragment {
         val frag = navHostFragment.childFragmentManager.fragments[0]
@@ -56,10 +59,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             navController.popBackStack()
             navController.navigate(R.id.b3Fragment)
         }
-
-        setFragmentResultListener("KEY_RESULT") { _, bundle ->
-            if (getCurrentFragment() is RefreshListener) {
-                (getCurrentFragment() as RefreshListener).onRefresh(bundle)
+        setResultListener {
+            addResultBackValue = it
+            when (it) {
+                is AddResultBackValue -> {
+                    if (getCurrentFragment() is RefreshListener) {
+                        (getCurrentFragment() as RefreshListener).onRefresh(it.value)
+                    }
+                }
             }
         }
     }

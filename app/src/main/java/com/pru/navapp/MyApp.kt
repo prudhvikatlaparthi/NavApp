@@ -2,10 +2,17 @@ package com.pru.navapp
 
 import android.app.Application
 import android.content.Context
+import com.google.android.gms.location.LocationServices
+import com.pru.navapp.location.LocationClient
+import com.pru.navapp.location.LocationClientSdk
 import com.pru.navapp.navigation.AppNavigator
 import com.pru.navapp.navigation.AppNavigatorSdk
 import com.pru.navapp.remote.ApiService
 import com.pru.navapp.repository.ApiRepository
+import io.github.inflationx.calligraphy3.CalligraphyConfig
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor
+import io.github.inflationx.viewpump.ViewPump
+
 
 private var appContext_: Context? = null
 val appContext: Context
@@ -26,7 +33,12 @@ val apiRepository: ApiRepository
         "Api Repository not initialized yet."
     )
 
-private val repository: ApiRepository = ApiRepository(apiService = ApiService.getApiService())
+private var locationClient_: LocationClient? = null
+
+val MainActivity.locationClient: LocationClient
+    get() = locationClient_ ?: throw IllegalStateException(
+        "Location Client not initialized yet."
+    )
 
 class MyApp : Application() {
     override fun onCreate() {
@@ -34,5 +46,20 @@ class MyApp : Application() {
         appContext_ = applicationContext
         appNavigator_ = AppNavigatorSdk()
         apiRepository_ = ApiRepository(apiService = ApiService.getApiService())
+        locationClient_ = LocationClientSdk(
+            client = LocationServices.getFusedLocationProviderClient(applicationContext)
+        )
+        ViewPump.init(
+            ViewPump.builder()
+                .addInterceptor(
+                    CalligraphyInterceptor(
+                        CalligraphyConfig.Builder()
+                            .setDefaultFontPath("font/RobotoCondensed-Regular.ttf")
+                            .setFontAttrId(R.attr.fontPath)
+                            .build()
+                    )
+                )
+                .build()
+        )
     }
 }

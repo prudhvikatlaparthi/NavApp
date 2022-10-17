@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_navigation"
+            app:destination="@id/navigation" />
     </fragment>
     <include app:graph="@navigation/add_graph" />
     <fragment
